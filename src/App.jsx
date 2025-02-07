@@ -28,6 +28,9 @@ import AdminDashboardPage from "./pages/Admin/AdminDashboardPage";
 import AdminActivityPage from "./pages/Admin/AdminActivityPage";
 import UserCalendarPage from "./pages/User/UserCalendarPage";
 import AdminCommunityPage from "./pages/Admin/AdminCommunityPage";
+import ActivityPage from "./components/Activity/ActivityPage";
+import FormTestPage from "./components/Assessment/AssessmentForm";
+import DASS21ResultPage from "./components/Assessment/DASS21ResultPage";
 
 function App() {
   const { authUser, authAdmin, checkAuth, isCheckingAuth, onlineUsers } =
@@ -70,8 +73,28 @@ function App() {
         />
         <Route
           exact
+          path="/pleasurable-activities"
+          element={authUser ? <ActivityPage /> : <Navigate to="/login" />}
+        />
+        <Route
+          exact
+          path="/mastery-activities"
+          element={authUser ? <ActivityPage /> : <Navigate to="/login" />}
+        />
+        <Route
+          exact
           path="/select-assessment"
           element={authUser ? <UserAssessmentPage /> : <Navigate to="/login" />}
+        />
+        <Route
+          exact
+          path="/assessment/:assessmentId"
+          element={authUser ? <FormTestPage /> : <Navigate to="/login" />}
+        />
+        <Route
+          exact
+          path="/results/dass21/:userId/:assessmentId"
+          element={authUser ? <DASS21ResultPage /> : <Navigate to="/login" />}
         />
         <Route
           exact
