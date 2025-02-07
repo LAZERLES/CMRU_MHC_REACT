@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useAssessmentStore } from "../../store/useAssessmentStore";
@@ -7,6 +8,7 @@ import { toast } from "react-hot-toast";
 import BackToHomeButton from "../Button/BackToHomeButton";
 
 const AssessmentForm = () => {
+  const navigate = useNavigate(); // Replace useHistory with useNavigate
   const { assessmentId } = useParams();
   const { fetchAssessmentById, currentAssessment, loading, error, saveUserAnswers } = useAssessmentStore();
   const { authUser } = useAuthStore(); // Get the logged-in user from the auth store
@@ -39,8 +41,12 @@ const AssessmentForm = () => {
     const response = await saveUserAnswers(assessmentId, formattedAnswers); // Use the formatted answers
   
     toast.success(response.message || "Assessment submitted successfully!");
-  };
   
+    // After submitting, navigate to the result page
+    navigate(`/results/dass21/${authUser.id}/${assessmentId}`, {
+        state: { answers: formattedAnswers }
+    }); // Example: Navigate to the result page
+  };
 
   // Display loading state
   if (loading) {

@@ -30,6 +30,7 @@ import UserCalendarPage from "./pages/User/UserCalendarPage";
 import AdminCommunityPage from "./pages/Admin/AdminCommunityPage";
 import ActivityPage from "./components/Activity/ActivityPage";
 import FormTestPage from "./components/Assessment/AssessmentForm";
+import DASS21ResultPage from "./components/Assessment/DASS21ResultPage";
 
 function App() {
   const { authUser, authAdmin, checkAuth, isCheckingAuth, onlineUsers } =
@@ -89,6 +90,11 @@ function App() {
           exact
           path="/assessment/:assessmentId"
           element={authUser ? <FormTestPage /> : <Navigate to="/login" />}
+        />
+        <Route
+          exact
+          path="/results/dass21/:userId/:assessmentId"
+          element={authUser ? <DASS21ResultPage /> : <Navigate to="/login" />}
         />
         <Route
           exact
